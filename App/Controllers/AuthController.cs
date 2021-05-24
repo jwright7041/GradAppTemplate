@@ -36,6 +36,8 @@ namespace App.Controllers
             {
                 UserName = registration.Email,
                 Email = registration.Email,
+                FirstName = registration.FirstName,
+                LastName = registration.LastName
             };
             var result = await _userManager.CreateAsync(newUser, registration.Password);
             if (result.Succeeded)

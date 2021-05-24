@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.ApiModels;
 using App.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MediaController : ControllerBase

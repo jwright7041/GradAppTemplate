@@ -15,6 +15,8 @@ namespace App.ApiModels
             {
                 Id = user.Id,
                 Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
         }
 
@@ -23,7 +25,9 @@ namespace App.ApiModels
             return new User
             {
                 Id = userModel.Id,
-                Email = userModel.Email
+                Email = userModel.Email,
+                FirstName = userModel.FirstName,
+                LastName = userModel.LastName
             };
         }
 
