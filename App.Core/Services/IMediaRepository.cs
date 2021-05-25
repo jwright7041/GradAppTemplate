@@ -12,5 +12,6 @@ namespace App.Core.Services
         Media Get(int id);
         IEnumerable<Media> GetAll();
         void Remove(Media media);
+        IEnumerable<Media> GetAllForUser(string userId);
     }
 }

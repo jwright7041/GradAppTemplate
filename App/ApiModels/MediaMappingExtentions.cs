@@ -16,7 +16,6 @@ namespace App.ApiModels
                 Name = media.Name,
                 Type = media.Type,
                 Status = media.Status,
-                //User = media.User,
                 UserId = media.UserId
             };
         }
@@ -29,7 +28,7 @@ namespace App.ApiModels
                 Name = media.Name,
                 Type = media.Type,
                 Status = media.Status,
-                UserId = media.UserId
+                UserId = media.UserId,
             };
         }
 

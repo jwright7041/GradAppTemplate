@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using App.ApiModels;
 using App.Core.Services;
@@ -22,21 +23,40 @@ namespace App.Controllers
             _mediaService = mediaService;
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
+        private string CurrentUserId
         {
-            return Ok(_mediaService.GetAll().ToApiModels());
+            get
+            {
+                return User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var mediaModels = _mediaService
+                .GetAllForUser(CurrentUserId)
+                .ToApiModels();
+
+            return Ok(mediaModels);
+            //return Ok(_mediaService.GetAll().ToApiModels());
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var activity = _mediaService.Get(id);
+            var media = _mediaService.Get(id);
 
-            if (activity == null)
+            if (media == null)
                 return NotFound();
 
-            return Ok(activity.ToApiModel());
+            if (media.UserId != CurrentUserId)
+            {
+                ModelState.AddModelError("UserId", "You can only retrieve your own activities");
+                return BadRequest(ModelState);
+            }
+
+            return Ok(media.ToApiModel());
         }
         
         [HttpPost]

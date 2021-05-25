@@ -62,5 +62,13 @@ namespace App.Infrastructure.Data
 
             return current;
         }
+
+        public IEnumerable<Media> GetAllForUser(string userId)
+        {
+            return _appDbContext.Medias
+                .Include(a => a.User)
+                .Where(a => a.UserId == userId)
+                .ToList();
+        }
     }
 }

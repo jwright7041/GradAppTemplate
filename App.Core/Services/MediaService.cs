@@ -38,5 +38,10 @@ namespace App.Core.Services
         {
             return _mediaRepository.Update(media);
         }
+
+        public IEnumerable<Media> GetAllForUser(string userId)
+        {
+            return _mediaRepository.GetAllForUser(userId);
+        }
     }
 }
